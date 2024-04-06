@@ -1,0 +1,13 @@
+Start Zookeeper
+----------------
+cmd>cd C:\kafka_2.12-2.6.0
+cmd> .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+Start Kafka setup
+------------------
+cmd> cd C:\kafka_2.12-2.6.0
+cmd> .\bin\windows\kafka-server-start.bat .\config\server.properties
+
+Create a Topic
+----------------
+cmd>.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic myKafkaTest
