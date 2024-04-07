@@ -1,5 +1,6 @@
 package com.kafka.KafkaPractice.service;
 
+import com.kafka.KafkaPractice.entity.Customer;
 import com.kafka.KafkaPractice.repository.MessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,15 @@ public class MessageConsumer {
     @Autowired
     private MessageRepository messageRepo;
 
-    @KafkaListener(topics = "${myapp.kafka.topic}", groupId = "xyz")
+   /* @KafkaListener(topics = "${myapp.kafka.topic}", groupId = "xyz")
     public void consume(String message) {
         log.info("MESSAGE RECEIVED AT CONSUMER END -> " + message);
         messageRepo.addMessage(message);
+    }*/
+
+    @KafkaListener(topics = "${myapp.kafka.topic}", groupId = "xyz")
+    public void consume123(Customer message) {
+        log.info("Object RECEIVED AT CONSUMER END -> " + message.toString());
+        messageRepo.addMessage(message.toString());
     }
 }

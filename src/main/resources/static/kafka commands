@@ -10,4 +10,14 @@ cmd> .\bin\windows\kafka-server-start.bat .\config\server.properties
 
 Create a Topic
 ----------------
-cmd>.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic myKafkaTest
+cmd>.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic JavaTechieTopic
+
+console producer :
+------------------
+C:\Users\Kafka\kafka_2.12-2.6.0>.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic JavaTechie
+Topic
+
+Console consumer :
+------------------
+C:\Users\Kafka\kafka_2.12-2.6.0>.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic JavaTechie
+Topic --from-beginning

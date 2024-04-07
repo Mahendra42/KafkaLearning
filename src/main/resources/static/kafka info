@@ -1,0 +1,103 @@
+what is kafka ?
+    - Continuous event driven systems
+      eg: Paytm application - the paytm application which continuously stream data of the flight booking services of different users to the kafka server and these data has been processed continuosly.
+
+Where does kafka comes from ?
+    it is an open source tools implemented by linkedIn later purchased by apache software systems.
+
+Why do we need Kafka ?
+    when we have multiple application has to communicate with each other there we will see a lot of confusion in implementation and lot coding part need to done.
+    to overcome these situation we came across this particular architecture as a part of this architecture
+    we have a kafka server which acts as a mediator between the different applications so when ever an application has to communicate with other service first it will produce the info to the topic and other application subscribe the topic and consumes the information.
+
+How does it works ?
+    it is pub sub model in which
+
+    publisher( publishes the data to the kafka server ) --> Kafka server --> Subscriber ( subscriber subscribe to the kafka server and consumes the data )
+
+
+Kafka Architecture and Components :
+
+Kafka Components :
+    - Producer : it publishes the data to the broker(kafke server)
+    - Consumer : it receives the data from the broker
+    - Broker   : it acts a mediator between the application and stores data.
+    - Cluster  : it is used to represent group of brokers
+    - Topic    : it classifies the messages(payment data,insurance data and recharge data etc)
+    - Partitions: it is division making on the kafka topic for better storage of chunks of data comming from the producer.
+    - Offset   : sequence number given to each message in partition of kafka topic.
+    - Consumer Group : Group of consumer which configured on groupId and consumes the messages from a partitions of a topic.1
+    - Zookeeper: ZooKeeper is prerequisite for kafka,it uses for co ordination and to track the status of kafka cluster node,it keeps track of kafka topics,partitions and offsets etc.
+
+
+Kafka Installation :
+    Open Source : Apache Kafka
+    COmmercial distribution : Confluent Kafka
+    Managed Kafka Service : confluent and AWS.
+Kafka Offset explorer.
+
+Producer - Consumer Flow :
+    1. Start Zoo Keeper :default port :2181
+    2. Start Kafka Server :default port :9092
+    3. Create Topic [partition count and replication factor]
+
+Start Zookeeper
+----------------
+cmd>cd C:\kafka_2.12-2.6.0
+cmd> .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+Start Kafka setup
+------------------
+cmd> cd C:\kafka_2.12-2.6.0
+cmd> .\bin\windows\kafka-server-start.bat .\config\server.properties
+
+Create a Topic
+----------------
+cmd>.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic JavaTechieTopic
+
+console producer :
+------------------
+C:\Users\Kafka\kafka_2.12-2.6.0>.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic JavaTechie
+Topic
+
+COnsole consumer :
+------------------
+C:\Users\Kafka\kafka_2.12-2.6.0>.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic JavaTechie
+Topic --from-beginning
+
+
+Different ways to create a topic in kafka server:
+    - By using CMD Prompt
+    - Via spring boot application and
+    - By using GUI applications (kafka offset explorer)
+
+Kafka LAG:
+    - when consumer unable to consume all message which are present in topic due to some issue this particular lag helps us to identify how many
+      message a particular consumer yet to consume or process.
+
+Kafka Serialize and deserialize:
+    - when we want to work with objects over kafka architecture we need to follow serialization and deserialization.
+    - serialization is to happen when we sent a message to a kafka server.
+    - and deserialization is to happen we consumer consumes messages from the kafka server.
+    - we can these serialization and deserialization information to a producer and consumer in two ways
+        1. by using application properties
+        2. by using java based configuration --it is used when we want customization in the configuration.
+
+
+Test Containers :
+    Testing the Kafka application with out depending on the Kafka infrastructure.
+
+Error Handling in Consuming the messages:
+    When we are having a communication with database and AWS ,somewhere in the today it goes down ,we will get issues and lose processing the data which we actually required to process
+    for to handle such type of scenarios in kafka consumer area we are having away to handle them
+    those are -- implementing retryable mechanisma and loading the failed processed data to the DLT(Dead Letter Topic).
+
+Kafka Schema Registry and Avro :
+ https://github.com/Java-Techie-jt/spring-kafka-avro
+
+
+
+
+
+
+
